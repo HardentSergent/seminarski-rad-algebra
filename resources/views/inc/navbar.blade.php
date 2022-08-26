@@ -13,6 +13,11 @@
             <li><a href="/home" class="nav-link px-2 text-secondary">Home</a></li>
             <li><a href="/about" class="nav-link px-2 text-secondary">About</a></li>
             <li><a href="/posts" class="nav-link px-2 text-secondary">Posts</a></li>
+            @foreach($navigation as $navigation)
+            @if ($navigation->is_published == "Show")
+            <li><a href="/nav-menu/{{$navigation->slug}}" class="nav-link px-2 text-secondary">{{$navigation->title}}</a></li>
+            @endif
+            @endforeach
             
             
             

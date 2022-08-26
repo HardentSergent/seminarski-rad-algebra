@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Navigation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Auth;
 
 class NavigationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +22,7 @@ class NavigationController extends Controller
     public function index()
     {
         $navigation = Navigation::orderBy('id', 'asc')->get();
+
         return view('nav-menu.index')->with('navigation', $navigation);
     }
 
@@ -62,8 +69,9 @@ class NavigationController extends Controller
     public function show($slug)
     {
         $navigation = Navigation::where('slug', '=', $slug)->first();
-        return view('nav-menu.show')->withNavigation($navigation);
-        //return view('nav-menu.show',compact('navigation'));
+          
+            return view('nav-menu.show')->with(['nav-menu' => $navigation]);
+        //return view('nav-menu.show')->withNavigation($navigation);
     }
 
     /**
@@ -72,7 +80,7 @@ class NavigationController extends Controller
      * @param  \App\Models\Navigation  $navigation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+     public function edit($id)
     {
         $navigation = Navigation::find($id);
 

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('is_published');
-            //$table->boolean('is_published')->default(false);
             $table->mediumText('body');
             $table->timestamps();
         });

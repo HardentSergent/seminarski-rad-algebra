@@ -3,7 +3,27 @@
 @section('content')
 <a href="/nav-menu" class="btn btn-default">Nazad</a>
       <h1>Edit Navigation Item</h1>
+
+      @php
+        $url = \URL::current();
+        $id = Str::length($url)
+      @endphp
+
+      @if ($id == 37)
+        @php
+          $id = substr($url, -6, -5);
+        @endphp
+      @else
+       @php
+         $id = substr($url, -7, -5);
+       @endphp
+    @endif
+    
+      @foreach ($navigation as $navigation)
+        @if ($navigation->id == $id)
+            
       {!! Form::open(['action' => ['App\Http\Controllers\NavigationController@update', $navigation->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+          
           <div class="form-group">
             {{Form::label('title', 'Title')}}
             {{Form::text('title', $navigation->title, ['class' => 'form-control', 'placeholder' => 'Title'])}}
@@ -27,4 +47,6 @@
           {{Form::hidden('_method', 'PUT')}}
           {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
       {!! Form::close() !!}
+      @endif
+    @endforeach
 @endsection

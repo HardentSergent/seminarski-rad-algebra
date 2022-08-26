@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Navigation Managment') }}</div>
                 <div class="card-body">
                   @can('edit-users')
-                  <a href="nav-menu/create" class="btn btn-primary">Create post</a>
+                  <a href="nav-menu/create" class="btn btn-primary">Create Site</a>
                   @endcan
                   <table class="table">
                     <thead>
